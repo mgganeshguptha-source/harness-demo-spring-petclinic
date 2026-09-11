@@ -16,6 +16,9 @@ Results stay sorted by last name, ascending, as they are today.
 The search is server-side; results are paginated at the current page size (existing behaviour, do not change page size).
 Max length: "The Last name input accepts up to 50 characters. If the input exceeds 50 characters, the page shows a validation message 'Last name must be 50 characters or fewer' and does not run the search."
 Unicode/normalization: "Matching compares characters as entered, case-insensitive only. No accent or Unicode normalization is applied — 'e' does not match 'é'."
+Existing search route: The existing /owners/find page remains available and unchanged. This story only adds the in-page last-name filter to the /owners list; it does not remove or redirect the existing find-owners route.
+Whitespace-only input: A value containing only spaces is treated as an empty field — the page returns all owners, same as a blank input. Leading and trailing spaces on an otherwise non-empty value are trimmed before the prefix match.
+Validation message and results table: When the entered last name exceeds 50 characters, the page shows the validation message "Last name must be 50 characters or fewer", does not run the search, and renders an empty results table beneath the message (it does not retain previously loaded results).
 
 In scope: the Owners list page and its backend query.
 Out of scope: searching by first name, city, or any other field; changes to the owner detail page.
