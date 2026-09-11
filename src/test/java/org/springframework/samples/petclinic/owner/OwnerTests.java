@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic.owner;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OwnerTests {
@@ -46,6 +47,95 @@ class OwnerTests {
 		owner.addPet(pet);
 
 		assertEquals(1, owner.getPets().size());
+	}
+
+	@Test
+	void hasPetsReturnsFalseWhenOwnerHasNoPets() {
+		Owner owner = new Owner();
+
+		assertFalse(owner.hasPets());
+		assertTrue(owner.getPets().isEmpty());
+	}
+
+	@Test
+	void hasPetsReturnsTrueWhenOwnerHasOnePet() {
+		Owner owner = new Owner();
+		Pet pet = new Pet();
+		pet.setId(5);
+		pet.setName("Buddy");
+
+		owner.addPet(pet);
+
+		assertTrue(owner.hasPets());
+		assertEquals(1, owner.getPets().size());
+		assertTrue(owner.getPets().contains(pet));
+	}
+
+	@Test
+	void hasPetsReturnsTrueWhenOwnerHasMultiplePets() {
+		Owner owner = new Owner();
+		Pet firstPet = new Pet();
+		firstPet.setId(5);
+		firstPet.setName("Buddy");
+		Pet secondPet = new Pet();
+		secondPet.setId(6);
+		secondPet.setName("Max");
+
+		owner.addPet(firstPet);
+		owner.addPet(secondPet);
+
+		assertTrue(owner.hasPets());
+		assertEquals(2, owner.getPets().size());
+		assertEquals(firstPet, owner.getPets().get(0));
+		assertEquals(secondPet, owner.getPets().get(1));
+	}
+
+	@Test
+	void hasPetsDoesNotChangePetCollectionContentsOrSize() {
+		Owner owner = new Owner();
+		Pet firstPet = new Pet();
+		firstPet.setId(5);
+		firstPet.setName("Buddy");
+		Pet secondPet = new Pet();
+		secondPet.setId(6);
+		secondPet.setName("Max");
+		owner.addPet(firstPet);
+		owner.addPet(secondPet);
+
+		int petsSizeBeforeCheck = owner.getPets().size();
+
+		assertTrue(owner.hasPets());
+		assertEquals(petsSizeBeforeCheck, owner.getPets().size());
+		assertEquals(firstPet, owner.getPets().get(0));
+		assertEquals(secondPet, owner.getPets().get(1));
+	}
+
+	@Test
+	void addPetWithNullRemainsNoOpAndHasPetsStaysFalse() {
+		Owner owner = new Owner();
+
+		owner.addPet(null);
+
+		assertFalse(owner.hasPets());
+		assertTrue(owner.getPets().isEmpty());
+	}
+
+	@Test
+	void addPetRejectsDuplicatePersistedPetAndHasPetsStaysTrue() {
+		Owner owner = new Owner();
+		Pet firstPet = new Pet();
+		firstPet.setId(5);
+		firstPet.setName("Buddy");
+		Pet duplicatePet = new Pet();
+		duplicatePet.setId(5);
+		duplicatePet.setName("Buddy");
+
+		owner.addPet(firstPet);
+		owner.addPet(duplicatePet);
+
+		assertTrue(owner.hasPets());
+		assertEquals(1, owner.getPets().size());
+		assertTrue(owner.getPets().contains(firstPet));
 	}
 
 }
