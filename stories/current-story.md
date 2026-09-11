@@ -14,6 +14,8 @@ If no owner matches, the page shows the message "No owners found" and the empty 
 Matching is prefix-only — searching "avis" does not return "Davis".
 Results stay sorted by last name, ascending, as they are today.
 The search is server-side; results are paginated at the current page size (existing behaviour, do not change page size).
+Max length: "The Last name input accepts up to 50 characters. If the input exceeds 50 characters, the page shows a validation message 'Last name must be 50 characters or fewer' and does not run the search."
+Unicode/normalization: "Matching compares characters as entered, case-insensitive only. No accent or Unicode normalization is applied — 'e' does not match 'é'."
 
 In scope: the Owners list page and its backend query.
 Out of scope: searching by first name, city, or any other field; changes to the owner detail page.
