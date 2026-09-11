@@ -1,24 +1,17 @@
-Title: Add last-name filter to the Owners list
+Title: Add a method to check whether an Owner has any pets
 
 Story:
-As a clinic staff member, I want to filter the Owners list by last name so I can find an owner quickly without paging through the whole list. Today the Owners page (/owners) shows all owners with no way to narrow the list. This story adds a last-name search to that existing page.
+As a developer, I want to ask an Owner whether it currently has any pets, so that calling code can check this directly instead of fetching the pet list and testing its size. Today the Owner entity exposes its list of pets, and callers check emptiness themselves. This story adds a convenience method on the Owner class that answers the question directly.
 
 Expected behaviour:
-The Owners page gains a single text input labelled "Last name" above the results table. Submitting the form filters the list to owners whose last name starts with the entered text, case-insensitive. The existing table columns stay unchanged (Name, Address, City, Telephone, Pets).
+The Owner class gains a method hasPets() that returns a boolean: true when the owner has one or more pets, false when the owner has none. It reads the owner's existing pets collection and does not change how pets are stored or added.
 
-Acceptance criteria (as the BA wrote them):
+Acceptance criteria:
 
-Searching "Davis" returns only owners whose last name begins with "Davis", ignoring case ("davis" and "DAVIS" return the same results).
-Searching with an empty last-name field returns all owners.
-If no owner matches, the page shows the message "No owners found" and the empty table.
-Matching is prefix-only — searching "avis" does not return "Davis".
-Results stay sorted by last name, ascending, as they are today.
-The search is server-side; results are paginated at the current page size (existing behaviour, do not change page size).
-Max length: "The Last name input accepts up to 50 characters. If the input exceeds 50 characters, the page shows a validation message 'Last name must be 50 characters or fewer' and does not run the search."
-Unicode/normalization: "Matching compares characters as entered, case-insensitive only. No accent or Unicode normalization is applied — 'e' does not match 'é'."
-Existing search route: The existing /owners/find page remains available and unchanged. This story only adds the in-page last-name filter to the /owners list; it does not remove or redirect the existing find-owners route.
-Whitespace-only input: A value containing only spaces is treated as an empty field — the page returns all owners, same as a blank input. Leading and trailing spaces on an otherwise non-empty value are trimmed before the prefix match.
-Validation message and results table: When the entered last name exceeds 50 characters, the page shows the validation message "Last name must be 50 characters or fewer", does not run the search, and renders an empty results table beneath the message (it does not retain previously loaded results).
+When an owner has one or more pets, hasPets() returns true.
+When an owner has no pets, hasPets() returns false.
+hasPets() does not add, remove, or modify any pet.
+Existing owner and pet functionality (add pet, list pets, view owner) is unchanged.
 
-In scope: the Owners list page and its backend query.
-Out of scope: searching by first name, city, or any other field; changes to the owner detail page.
+In scope: the Owner entity class only.
+Out of scope: any UI, template, controller, or endpoint change; any change to how pets are added or stored.
