@@ -46,3 +46,7 @@ out/
 _site/
 *.css
 !petclinic.css
+
+#harness related files
+.harness/run-state.json 
+.harness/blocked.md
