@@ -1,38 +1,14 @@
-# =============================================================================
-# <service-repo>/.github/workflows/harness.yml
-# THE CALLER — thin by design. All logic lives in the reusable engine workflow.
-#
-# Run it from Actions -> Harness -> Run workflow.
-#
-# RESUME
-# When a run halts (a gate stopped it and a human is needed), the harness pushes
-# everything it produced to `harness-wip/<feature_id>` — the source it wrote, the
-# artifacts, and its run state. To continue:
-#
-#   1. git fetch && git checkout harness-wip/<feature_id>
-#   2. fix the code, commit, push
-#   3. re-run this workflow with the SAME feature_id and resume = true
-#
-# The phases that already passed are not re-run. That matters for cost as much as
-# time: context and prompt_steps are the two most expensive phases in a run and
-# the least likely to need redoing after a code-level fix.
-#
-# When to resume, and when not to:
-#   resume  — the defect is in the code (review found a bug, a test failed)
-#   restart — the defect is upstream, in the context or the plan. Resuming keeps
-#             the bad plan and you will fail again further down.
-# =============================================================================
 name: SDLC-Harness
 
 on:
   workflow_dispatch:
     inputs:
       feature_id:
-        description: "Story / feature id to run (e.g. BOOK-1)"
+        description: "Story / feature id (e.g. BCBSM-1234)"
         required: true
         type: string
       base:
-        description: "Branch to run against and PR into (BCBSM dev branch, e.g. PM_Sep). Blank = this repo's default branch."
+        description: "Dev branch to run against and PR into (e.g. PM_Sep, VoC_Oct). Blank = repo default."
         required: false
         default: ""
         type: string
@@ -57,6 +33,13 @@ on:
           - validation
           - documentation
           - raise_pr
+
+# The reusable engine workflow pushes branches and opens a PR. A reusable
+# workflow can never exceed the permissions granted here by the caller, so these
+# must be present or the engine job is denied (contents: read, pull-requests: none).
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   harness:
