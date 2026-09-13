@@ -78,6 +78,37 @@ write_exclude:
   - "**/*MapperImpl.java"    # MapStruct-generated mapper implementations
 
 
+# ----------------------------------------------------------------- audit retention
+# Whether to KEEP the per-run audit branch (harness-audit/<feature>/<stamp>-
+# <outcome>-<run_id>) after the workflow pushes it. The branch is a complete,
+# immutable trail of one run — written on success AND on halt. Retention is a
+# COMPLIANCE decision owned by this repo, which is why it lives here.
+#   true  => keep the audit branch (default). The safe choice for a regulated /
+#            healthcare repo: the full run trail persists unless someone with
+#            retention authority opts out.
+#   false => the workflow pushes the branch, then deletes it — for repos whose
+#            run trail is captured elsewhere and where per-run branches are noise.
+# The engine only records this value into run-summary.json; the workflow acts on
+# it (the engine never deletes remote branches).
+retain_audit_branch: true
+
+
+# ----------------------------------------------------------------- credit metrics
+# The metrics layer reads GitHub's AI-credit counter before and after each phase
+# to estimate that phase's cost (which model cost what). GitHub's counter LAGS the
+# requests that produced it, so this sets how long to wait after a phase finishes
+# before taking the "after" reading.
+#   > 0 => wait this many seconds, then read. More accurate — the counter has time
+#          to settle. This wait is paid on EVERY phase attempt (loopbacks too), so
+#          30 across nine phases adds ~4.5 min of waiting to a run.
+#   0   => read IMMEDIATELY, no wait. Faster runs, but the per-phase credit figure
+#          is rough (the counter may not have caught up yet).
+# Either way the per-phase MODEL is always recorded; only credit accuracy changes.
+# Org-billed Copilot seats cannot read the counter at all — those phases record
+# the model but no credit figure, regardless of this value.
+credit_settle_seconds: 30
+
+
 # ----------------------------------------------------------------- repo stack
 # STACK-SPECIFIC. Declares the technology stack(s) this repository contains.
 # Drives two filters: which instruction SUBFOLDERS load (backend/, angular-
