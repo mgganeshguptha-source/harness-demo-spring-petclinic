@@ -1,18 +1,17 @@
-Title: Improve the Owners search so staff can find people faster
+Title: Add a method to check whether an Owner has any pets
 
 Story:
-As a clinic staff member, I want a better search on the Owners page so I can find the right owner more easily. Right now I can only see the full list, and when the clinic has a lot of owners it's slow to find someone. Let's make the search smarter and quicker.
+As a developer, I want to ask an Owner whether it currently has any pets, so that calling code can check this directly instead of fetching the pet list and testing its size. Today the Owner entity exposes its list of pets, and callers check emptiness themselves. This story adds a convenience method on the Owner class that answers the question directly.
 
 Expected behaviour:
-Staff should be able to search the Owners list and get relevant results quickly. The search should handle the common cases well and behave sensibly when there's nothing to show.
+The Owner class gains a method hasPets() that returns a boolean: true when the owner has one or more pets, false when the owner has none. It reads the owner's existing pets collection and does not change how pets are stored or added.
 
-Acceptance criteria (as the BA wrote them):
+Acceptance criteria:
 
-Staff can search for an owner and see matching results.
-The search should be fast even when there are many owners.
-Partial matches should work so staff don't have to type the whole name.
-If there are no matches, show an appropriate message.
-The results should be displayed clearly.
+When an owner has one or more pets, hasPets() returns true.
+When an owner has no pets, hasPets() returns false.
+hasPets() does not add, remove, or modify any pet.
+Existing owner and pet functionality (add pet, list pets, view owner) is unchanged.
 
-In scope: the Owners search experience.
-Out of scope: reporting features.
+In scope: the Owner entity class only.
+Out of scope: any UI, template, controller, or endpoint change; any change to how pets are added or stored.
