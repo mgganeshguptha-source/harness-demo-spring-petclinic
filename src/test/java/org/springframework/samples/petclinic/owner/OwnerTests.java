@@ -18,9 +18,11 @@ package org.springframework.samples.petclinic.owner;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class OwnerTests {
+public class OwnerTests {
 
 	@Test
 	void addPetAddsPersistedPet() {
@@ -46,6 +48,74 @@ class OwnerTests {
 		owner.addPet(pet);
 
 		assertEquals(1, owner.getPets().size());
+	}
+
+	@Test
+	void hasPetsReturnsFalseWhenOwnerHasNoPets() {
+		Owner owner = new Owner();
+
+		assertFalse(owner.hasPets());
+		assertEquals(0, owner.getPets().size());
+	}
+
+	@Test
+	void hasPetsReturnsTrueWhenOwnerHasOnePet() {
+		Owner owner = new Owner();
+		Pet pet = new Pet();
+		pet.setId(5);
+		pet.setName("Buddy");
+		owner.addPet(pet);
+
+		assertTrue(owner.hasPets());
+	}
+
+	@Test
+	void hasPetsReturnsTrueWhenOwnerHasMultiplePets() {
+		Owner owner = new Owner();
+		Pet firstPet = new Pet();
+		firstPet.setId(5);
+		firstPet.setName("Buddy");
+		Pet secondPet = new Pet();
+		secondPet.setId(6);
+		secondPet.setName("Max");
+		owner.addPet(firstPet);
+		owner.addPet(secondPet);
+
+		assertTrue(owner.hasPets());
+		assertEquals(2, owner.getPets().size());
+	}
+
+	@Test
+	void hasPetsDoesNotModifyPetsCollection() {
+		Owner owner = new Owner();
+		Pet firstPet = new Pet();
+		firstPet.setId(5);
+		firstPet.setName("Buddy");
+		Pet secondPet = new Pet();
+		secondPet.setId(6);
+		secondPet.setName("Max");
+		owner.addPet(firstPet);
+		owner.addPet(secondPet);
+
+		assertTrue(owner.hasPets());
+
+		assertEquals(2, owner.getPets().size());
+		assertSame(firstPet, owner.getPets().get(0));
+		assertSame(secondPet, owner.getPets().get(1));
+	}
+
+	@Test
+	void hasPetsReflectsCurrentStateAcrossRepeatedChecks() {
+		Owner owner = new Owner();
+
+		assertFalse(owner.hasPets());
+
+		Pet pet = new Pet();
+		pet.setId(5);
+		pet.setName("Buddy");
+		owner.addPet(pet);
+
+		assertTrue(owner.hasPets());
 	}
 
 }
