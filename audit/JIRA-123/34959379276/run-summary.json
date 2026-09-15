@@ -1,0 +1,49 @@
+{
+  "feature": "JIRA-123",
+  "run_id": "34959379276",
+  "status": "needs_input",
+  "retain_audit_branch": true,
+  "completed_phases": [
+    "context"
+  ],
+  "total_tokens": {
+    "input": 570090,
+    "output": 8603,
+    "cache_read": 490496,
+    "cache_write": 0,
+    "reasoning": 5986
+  },
+  "phase_token_log": [
+    {
+      "phase": "context",
+      "model": "gpt-5.4",
+      "phase_tokens": 578693,
+      "cumulative_tokens": 578693,
+      "input_tokens": 570090,
+      "output_tokens": 8603,
+      "cached_tokens": 490496,
+      "cache_write_tokens": 0,
+      "est_credits": 45.0654,
+      "est_usd": 0.450654,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "skill",
+        "glob",
+        "view",
+        "rg",
+        "apply_patch"
+      ]
+    }
+  ],
+  "cost_source": {
+    "is_estimate": false,
+    "basis": "GitHub billing API \u2014 consumed AI credits (grossQuantity), read once before and once after the run. 1 credit = $0.01.",
+    "endpoint": "GET /users/{username}/settings/billing/ai_credit/usage",
+    "caveat": "The delta is account-wide: it is accurate only while this account makes no other Copilot requests during the run.",
+    "unavailable_when": "Copilot licence billed via an org/enterprise (user-level endpoint returns no usage), or the token lacks 'Plan' user permission (read)."
+  }
+}
