@@ -1,0 +1,211 @@
+{
+  "feature": "JIRA-345",
+  "run_id": "35078222261",
+  "status": "done",
+  "retain_audit_branch": true,
+  "completed_phases": [
+    "context",
+    "design",
+    "prompt_steps",
+    "coding",
+    "code_review",
+    "unit_testing",
+    "validation",
+    "documentation",
+    "raise_pr"
+  ],
+  "total_tokens": {
+    "input": 1709621,
+    "output": 21665,
+    "cache_read": 1442201,
+    "cache_write": 86961,
+    "reasoning": 10349
+  },
+  "phase_token_log": [
+    {
+      "phase": "context",
+      "model": "gpt-5.4",
+      "phase_tokens": 407596,
+      "cumulative_tokens": 407596,
+      "input_tokens": 402623,
+      "output_tokens": 4973,
+      "cached_tokens": 334848,
+      "cache_write_tokens": 0,
+      "est_credits": 32.77445,
+      "est_usd": 0.3277445,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "skill",
+        "glob",
+        "view",
+        "rg",
+        "apply_patch"
+      ]
+    },
+    {
+      "phase": "prompt_steps",
+      "model": "gpt-5.4",
+      "phase_tokens": 228403,
+      "cumulative_tokens": 635999,
+      "input_tokens": 222250,
+      "output_tokens": 6153,
+      "cached_tokens": 183808,
+      "cache_write_tokens": 0,
+      "est_credits": 23.4352,
+      "est_usd": 0.234352,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "skill",
+        "glob",
+        "view",
+        "apply_patch"
+      ]
+    },
+    {
+      "phase": "coding",
+      "model": "gpt-5.4",
+      "phase_tokens": 144543,
+      "cumulative_tokens": 780542,
+      "input_tokens": 143319,
+      "output_tokens": 1224,
+      "cached_tokens": 118784,
+      "cache_write_tokens": 0,
+      "est_credits": 10.939350000000001,
+      "est_usd": 0.1093935,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "view",
+        "bash",
+        "apply_patch"
+      ]
+    },
+    {
+      "phase": "code_review",
+      "model": "claude-haiku-4.5",
+      "phase_tokens": 86589,
+      "cumulative_tokens": 867131,
+      "input_tokens": 84799,
+      "output_tokens": 1790,
+      "cached_tokens": 41483,
+      "cache_write_tokens": 43300,
+      "est_credits": 5.64143,
+      "est_usd": 0.0564143,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "create"
+      ]
+    },
+    {
+      "phase": "unit_testing",
+      "model": "gpt-5.4",
+      "phase_tokens": 119673,
+      "cumulative_tokens": 986804,
+      "input_tokens": 117875,
+      "output_tokens": 1798,
+      "cached_tokens": 91648,
+      "cache_write_tokens": 0,
+      "est_credits": 11.54495,
+      "est_usd": 0.1154495,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "apply_patch",
+        "bash"
+      ]
+    },
+    {
+      "phase": "validation",
+      "model": "claude-haiku-4.5",
+      "phase_tokens": 556239,
+      "cumulative_tokens": 1543043,
+      "input_tokens": 552548,
+      "output_tokens": 3691,
+      "cached_tokens": 508814,
+      "cache_write_tokens": 43661,
+      "est_credits": 11.307039999999999,
+      "est_usd": 0.11307039999999999,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "bash",
+        "glob",
+        "view",
+        "grep",
+        "create"
+      ]
+    },
+    {
+      "phase": "documentation",
+      "model": "gpt-5.4",
+      "phase_tokens": 82223,
+      "cumulative_tokens": 1625266,
+      "input_tokens": 81357,
+      "output_tokens": 866,
+      "cached_tokens": 73728,
+      "cache_write_tokens": 0,
+      "est_credits": 5.049449999999999,
+      "est_usd": 0.0504945,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "view",
+        "glob",
+        "apply_patch"
+      ]
+    },
+    {
+      "phase": "raise_pr",
+      "model": "gpt-5.4",
+      "phase_tokens": 106020,
+      "cumulative_tokens": 1731286,
+      "input_tokens": 104850,
+      "output_tokens": 1170,
+      "cached_tokens": 89088,
+      "cache_write_tokens": 0,
+      "est_credits": 7.922700000000001,
+      "est_usd": 0.079227,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "view",
+        "rg",
+        "apply_patch"
+      ]
+    }
+  ],
+  "cost_source": {
+    "is_estimate": false,
+    "basis": "GitHub billing API \u2014 consumed AI credits (grossQuantity), read once before and once after the run. 1 credit = $0.01.",
+    "endpoint": "GET /users/{username}/settings/billing/ai_credit/usage",
+    "caveat": "The delta is account-wide: it is accurate only while this account makes no other Copilot requests during the run.",
+    "unavailable_when": "Copilot licence billed via an org/enterprise (user-level endpoint returns no usage), or the token lacks 'Plan' user permission (read)."
+  }
+}
