@@ -47,6 +47,9 @@ _site/
 *.css
 !petclinic.css
 
-#harness related files
-.harness/run-state.json 
-.harness/blocked.md
+# SDLC-Harness — never merge run workspace or artifacts into dev/release branches.
+# Harness force-adds .harness/run-state.json + blocked.md onto harness-wip only;
+# all artifacts live on harness-metrics (metrics/ + artifacts/).
+.harness/
+audit/
+metrics/
