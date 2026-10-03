@@ -51,7 +51,9 @@ permissions:
 
 jobs:
   harness:
-    uses: YOUR-ORG/SDLC-Harness/.github/workflows/harness.yml@v1
+    # Engine pinned to tag v1 (must include the restored build/test/coverage
+    # gate — retag v1 on main after engine changes).
+    uses: mgganeshguptha-source/SDLC-Harness/.github/workflows/harness.yml@v1
     with:
       feature_id: ${{ inputs.feature_id }}
       base: ${{ inputs.base }}
@@ -60,10 +62,17 @@ jobs:
       node-version: "20"
       resume: ${{ inputs.resume }}
       start_phase: ${{ inputs.start_phase }}
-      # engine_ref defaults to v1 (a tag, so branch naming does not matter).
-      # toolkit_ref defaults to 'main' — set it when the toolkit repo's default
-      # branch is named differently (BCBSM repos use 'master').
-      toolkit_ref: master
+      # Engine + toolkit locations. engine_ref MUST match the @ref in `uses:`
+      # above — it is the engine code the job checks out and runs.
+      engine_repo: mgganeshguptha-source/SDLC-Harness
+      engine_ref: v1
+      toolkit_repo: mgganeshguptha-source/copilot-toolkit
+      # Toolkit's default branch. BCBSM toolkit repos use 'master'.
+      toolkit_ref: main
+      # Harness builds the code, runs unit tests + the coverage gate after
+      # unit_testing (loops back on red / low coverage). false = skip; the
+      # developer builds and tests locally before approving the PR.
+      runs_build: true
     secrets:
       # Repo access: checkout of the engine + toolkit, git push, gh pr create,
       # and credit reporting. A classic PAT is acceptable here.
