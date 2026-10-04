@@ -3,9 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>4.1.0</version>
+    <!-- Company starter parent (internal library, from maven-libs/petclinic-libs-PM) -->
+    <groupId>com.petclinic.platform.pom</groupId>
+    <artifactId>petclinic-starter-parent</artifactId>
+    <version>4.3.0-SNAPSHOT</version>
+    <relativePath/>
   </parent>
 
   <groupId>org.springframework.samples</groupId>
@@ -38,6 +40,12 @@
   </properties>
 
   <dependencies>
+    <!-- Internal client library published by the vets team (maven-libs/petclinic-libs-PM) -->
+    <dependency>
+      <groupId>com.petclinic.vets</groupId>
+      <artifactId>vets-service-openapi-client-code</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
     <!-- Spring and Spring Boot dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>

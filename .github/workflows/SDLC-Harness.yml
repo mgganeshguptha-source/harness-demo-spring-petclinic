@@ -73,6 +73,9 @@ jobs:
       # unit_testing (loops back on red / low coverage). false = skip; the
       # developer builds and tests locally before approving the PR.
       runs_build: true
+      # Offline build: resolve every library from this git store only (Maven
+      # Central is blocked on the runner). Blank = normal online build.
+      maven_libs_repo: mgganeshguptha-source/maven-libs
     secrets:
       # Repo access: checkout of the engine + toolkit, git push, gh pr create,
       # and credit reporting. A classic PAT is acceptable here.
