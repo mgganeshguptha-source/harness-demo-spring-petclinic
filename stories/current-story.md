@@ -15,3 +15,6 @@ hasSpecialty does not add, remove or modify specialties. Existing behaviour (get
 Clarifications (pre-answered): getSpecialtiesInternal() never returns null; it creates an empty set if needed. Specialties are mapped FetchType.EAGER, so there is no lazy-loading or transaction concern. Do not change the mapping.
 
 In scope: the Vet class only. Out of scope: UI, templates, controllers, repositories, database.
+
+Q – Leading/trailing whitespace around a non-blank name?
+Trim it. Remove leading and trailing whitespace from the input name, then compare it case-insensitively with each specialty's name as stored. For a vet with specialty "surgery", hasSpecialty(" surgery ") and hasSpecialty(" Surgery") return true. Whitespace inside the name is kept ("sur gery" does not match). Stored specialty names are compared as they are and are not modified. A name that is blank after trimming returns false (AC-4).
