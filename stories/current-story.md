@@ -15,3 +15,11 @@ Existing owner and pet functionality (add pet, list pets, view owner) is unchang
 
 In scope: the Owner entity class only.
 Out of scope: any UI, template, controller, or endpoint change; any change to how pets are added or stored.
+
+Q1 – Can the pets collection be null?
+No. Owner.pets is declared private final List<Pet> pets = new ArrayList<>();, so it is always initialized and can never be null (Hibernate also never sets a mapped collection to null). hasPets() needs no null handling: return !pets.isEmpty(). No null-specific behaviour or test is required. AC-3 means only "hasPets() must not add, remove or modify pets"; it is not about null.
+
+Q2 – Lazy loading / transactions?
+Not applicable. pets is mapped @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER), so pets are always loaded together with the owner. hasPets() cannot trigger a lazy load or a LazyInitializationException, even with spring.jpa.open-in-view=false. Implement it with isEmpty() on the existing collection. Do not change the fetch type or add transactional code.
+
+Also: count every pet in the collection, including a newly added pet that is not saved yet (no id). This matches "one or more pets".
