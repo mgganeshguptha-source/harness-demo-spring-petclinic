@@ -15,6 +15,8 @@
  */
 package org.springframework.samples.petclinic.vet;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.util.SerializationUtils;
 
@@ -23,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author Dave Syer
  */
-class VetTests {
+public class VetTests {
 
 	@Test
 	void serialization() {
@@ -36,6 +38,94 @@ class VetTests {
 		assertThat(other.getFirstName()).isEqualTo(vet.getFirstName());
 		assertThat(other.getLastName()).isEqualTo(vet.getLastName());
 		assertThat(other.getId()).isEqualTo(vet.getId());
+	}
+
+	@Test
+	void hasSpecialtyReturnsTrueForCaseInsensitiveMatch() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty("surgery")).isTrue();
+		assertThat(vet.hasSpecialty("Surgery")).isTrue();
+	}
+
+	@Test
+	void hasSpecialtyTrimsLeadingAndTrailingWhitespace() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty(" surgery ")).isTrue();
+		assertThat(vet.hasSpecialty(" Surgery")).isTrue();
+	}
+
+	@Test
+	void hasSpecialtyReturnsFalseForUnknownSpecialty() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty("dentistry")).isFalse();
+	}
+
+	@Test
+	void hasSpecialtyReturnsFalseWhenVetHasNoSpecialties() {
+		Vet vet = new Vet();
+
+		assertThat(vet.hasSpecialty("surgery")).isFalse();
+	}
+
+	@Test
+	void hasSpecialtyReturnsFalseForNullInput() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty(null)).isFalse();
+	}
+
+	@Test
+	void hasSpecialtyReturnsFalseForBlankInputAfterTrimming() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty(" ")).isFalse();
+		assertThat(vet.hasSpecialty("\t \n")).isFalse();
+	}
+
+	@Test
+	void hasSpecialtyReturnsFalseWhenInteriorWhitespaceDiffers() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty("sur gery")).isFalse();
+	}
+
+	@Test
+	void hasSpecialtyDoesNotModifyStoredSpecialtiesAndPreservesExistingBehavior() {
+		Vet vet = new Vet();
+		Specialty surgery = specialty("surgery");
+		Specialty radiology = specialty("radiology");
+		vet.addSpecialty(radiology);
+		vet.addSpecialty(surgery);
+
+		List<Specialty> specialtiesBeforeCheck = vet.getSpecialties();
+
+		assertThat(vet.hasSpecialty("surgery")).isTrue();
+
+		assertThat(vet.getNrOfSpecialties()).isEqualTo(2);
+		assertThat(vet.getSpecialties()).extracting(Specialty::getName).containsExactly("radiology", "surgery");
+		assertThat(vet.getSpecialties()).containsExactlyElementsOf(specialtiesBeforeCheck);
+
+		Specialty dentistry = specialty("dentistry");
+		vet.addSpecialty(dentistry);
+
+		assertThat(vet.getNrOfSpecialties()).isEqualTo(3);
+		assertThat(vet.getSpecialties()).extracting(Specialty::getName)
+			.containsExactly("dentistry", "radiology", "surgery");
+	}
+
+	private Specialty specialty(String name) {
+		Specialty specialty = new Specialty();
+		specialty.setName(name);
+		return specialty;
 	}
 
 }
