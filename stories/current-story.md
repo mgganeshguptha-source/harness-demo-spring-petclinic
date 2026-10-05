@@ -1,17 +1,17 @@
-Title: Add a method to check whether an Owner has any pets
+Title: Add a method to check whether a Vet has a given specialty
 
-Story:
-As a developer, I want to ask an Owner whether it currently has any pets, so that calling code can check this directly instead of fetching the pet list and testing its size. Today the Owner entity exposes its list of pets, and callers check emptiness themselves. This story adds a convenience method on the Owner class that answers the question directly.
+Story: As a developer, I want to ask a Vet whether it has a specialty with a given name, so calling code can check directly instead of looping over the specialty list.
 
-Expected behaviour:
-The Owner class gains a method hasPets() that returns a boolean: true when the owner has one or more pets, false when the owner has none. It reads the owner's existing pets collection and does not change how pets are stored or added.
+Expected behaviour: Vet gains public boolean hasSpecialty(String name). It returns true when any of the vet's specialties has that name, compared case-insensitively ("Surgery" matches "surgery"). It returns false when no specialty matches, when the vet has no specialties, or when name is null or blank. It reads the existing specialties through getSpecialtiesInternal() and does not change how specialties are stored or added.
 
 Acceptance criteria:
 
-When an owner has one or more pets, hasPets() returns true.
-When an owner has no pets, hasPets() returns false.
-hasPets() does not add, remove, or modify any pet.
-Existing owner and pet functionality (add pet, list pets, view owner) is unchanged.
+Vet with specialty "surgery": hasSpecialty("surgery") and hasSpecialty("Surgery") both return true.
+Vet with specialty "surgery": hasSpecialty("dentistry") returns false.
+Vet with no specialties: hasSpecialty("surgery") returns false.
+hasSpecialty(null) and hasSpecialty(" ") return false and do not throw.
+hasSpecialty does not add, remove or modify specialties. Existing behaviour (getSpecialties, getNrOfSpecialties, addSpecialty) is unchanged.
+
 
 In scope: the Owner entity class only.
 Out of scope: any UI, template, controller, or endpoint change; any change to how pets are added or stored.
@@ -23,3 +23,11 @@ Q2 – Lazy loading / transactions?
 Not applicable. pets is mapped @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER), so pets are always loaded together with the owner. hasPets() cannot trigger a lazy load or a LazyInitializationException, even with spring.jpa.open-in-view=false. Implement it with isEmpty() on the existing collection. Do not change the fetch type or add transactional code.
 
 Also: count every pet in the collection, including a newly added pet that is not saved yet (no id). This matches "one or more pets".
+=======
+Clarifications (pre-answered): getSpecialtiesInternal() never returns null; it creates an empty set if needed. Specialties are mapped FetchType.EAGER, so there is no lazy-loading or transaction concern. Do not change the mapping.
+
+In scope: the Vet class only. Out of scope: UI, templates, controllers, repositories, database.
+
+Q – Leading/trailing whitespace around a non-blank name?
+Trim it. Remove leading and trailing whitespace from the input name, then compare it case-insensitively with each specialty's name as stored. For a vet with specialty "surgery", hasSpecialty(" surgery ") and hasSpecialty(" Surgery") return true. Whitespace inside the name is kept ("sur gery" does not match). Stored specialty names are compared as they are and are not modified. A name that is blank after trimming returns false (AC-4).
+

@@ -18,9 +18,35 @@ package org.springframework.samples.petclinic.owner;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OwnerTests {
+
+	@Test
+	void hasPetsReturnsFalseForOwnerWithNoPets() {
+		Owner owner = new Owner();
+
+		assertFalse(owner.hasPets());
+		assertFalse(owner.hasPets());
+		assertEquals(0, owner.getPets().size());
+	}
+
+	@Test
+	void hasPetsReturnsTrueForOwnerWithPets() {
+		Owner owner = new Owner();
+		Pet pet = new Pet();
+		pet.setId(5);
+		pet.setName("Buddy");
+
+		owner.addPet(pet);
+
+		assertTrue(owner.hasPets());
+		assertTrue(owner.hasPets());
+		assertSame(pet, owner.getPets().get(0));
+		assertEquals(1, owner.getPets().size());
+	}
 
 	@Test
 	void addPetAddsPersistedPet() {
@@ -46,6 +72,22 @@ class OwnerTests {
 		owner.addPet(pet);
 
 		assertEquals(1, owner.getPets().size());
+	}
+
+	@Test
+	void hasPetsReflectsUnchangedStateAfterDuplicateAddAttempt() {
+		Owner owner = new Owner();
+		Pet pet = new Pet();
+		pet.setId(5);
+		pet.setName("Buddy");
+
+		owner.addPet(pet);
+		owner.addPet(pet);
+
+		assertTrue(owner.hasPets());
+		assertTrue(owner.hasPets());
+		assertEquals(1, owner.getPets().size());
+		assertSame(pet, owner.getPets().get(0));
 	}
 
 }
