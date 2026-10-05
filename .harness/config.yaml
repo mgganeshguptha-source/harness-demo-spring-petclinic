@@ -25,7 +25,7 @@ target_module: ""
 # The command the harness runs to execute unit tests. The HARNESS runs this, not
 # the agent. A non-zero exit fails the validation gate and halts/loops the run.
 # STACK-SPECIFIC: Maven "./mvnw test", Gradle "./gradlew test", npm "npm test".
-test_command: "./mvnw test"
+test_command: "mvn -U -T 1c -s $MAVEN_SETTINGS -e test"
 
 # Narrow the test run to a subset. Blank => run the whole suite.
 # Maven example: "-Dtest=OwnerServiceTest". Leave blank unless runs are slow.
@@ -58,7 +58,7 @@ coverage_csv: "target/site/jacoco/jacoco.csv"
 
 # The goal that produces the JaCoCo CSV. jacoco:report binds to prepare-package,
 # so the harness invokes it explicitly after tests.
-coverage_command: "./mvnw jacoco:report"
+coverage_command: "mvn -s $MAVEN_SETTINGS jacoco:report"
 
 # On a coverage MISS (tests pass but coverage below the bar), which phase to loop
 # back to. Coverage is a test problem, so this is unit_testing.
@@ -90,7 +90,7 @@ write_exclude:
 #            run trail is captured elsewhere and where per-run branches are noise.
 # The engine only records this value into run-summary.json; the workflow acts on
 # it (the engine never deletes remote branches).
-retain_audit_branch: true
+retain_audit_branch: false
 
 
 # ----------------------------------------------------------------- credit metrics

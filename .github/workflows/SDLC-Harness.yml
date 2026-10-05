@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       feature_id:
-        description: "Story / feature id (e.g. BCBSM-1234)"
+        description: "Story / feature id (e.g. OP018-1234)"
         required: true
         type: string
       base:
@@ -17,22 +17,22 @@ on:
         required: false
         default: false
         type: boolean
-      start_phase:
-        description: "Resume only — phase to re-enter at. Blank = where it halted."
-        required: false
-        default: ""
-        type: choice
-        options:
-          - ""
-          - context
-          - design
-          - prompt_steps
-          - coding
-          - code_review
-          - unit_testing
-          - validation
-          - documentation
-          - raise_pr
+#      start_phase:
+#        description: "Resume only — phase to re-enter at. Blank = where it halted."
+#        required: false
+#        default: ""
+#        type: choice
+#        options:
+#          - ""
+#          - context
+#          - design
+#          - prompt_steps
+#          - coding
+#          - code_review
+#          - unit_testing
+#          - validation
+#          - documentation
+#          - raise_pr
 
 # The reusable engine workflow pushes branches and opens a PR, and makes Copilot
 # model calls. A reusable workflow can NEVER hold more permission than its
@@ -61,7 +61,7 @@ jobs:
       python-version: "3.13"
       node-version: "20"
       resume: ${{ inputs.resume }}
-      start_phase: ${{ inputs.start_phase }}
+#      start_phase: ${{ inputs.start_phase }}
       # Engine + toolkit locations. engine_ref MUST match the @ref in `uses:`
       # above — it is the engine code the job checks out and runs.
       engine_repo: mgganeshguptha-source/SDLC-Harness
