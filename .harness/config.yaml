@@ -25,7 +25,7 @@ target_module: ""
 # The command the harness runs to execute unit tests. The HARNESS runs this, not
 # the agent. A non-zero exit fails the validation gate and halts/loops the run.
 # STACK-SPECIFIC: Maven "./mvnw test", Gradle "./gradlew test", npm "npm test".
-test_command: "mvn -U -T 1c -s $MAVEN_SETTINGS -e test"
+test_command: "mvn -U -T 1C -s $MAVEN_SETTINGS -e test"
 
 # Narrow the test run to a subset. Blank => run the whole suite.
 # Maven example: "-Dtest=OwnerServiceTest". Leave blank unless runs are slow.
