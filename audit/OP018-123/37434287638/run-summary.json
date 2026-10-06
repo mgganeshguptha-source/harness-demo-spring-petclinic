@@ -1,0 +1,382 @@
+{
+  "feature": "OP018-123",
+  "run_id": "37434287638",
+  "status": "done",
+  "retain_audit_branch": false,
+  "completed_phases": [
+    "context",
+    "design",
+    "prompt_steps",
+    "coding",
+    "code_review",
+    "unit_testing",
+    "validation",
+    "documentation",
+    "raise_pr"
+  ],
+  "total_tokens": {
+    "input": 1908725,
+    "output": 24994,
+    "cache_read": 1648475,
+    "cache_write": 88276,
+    "premium_cost": 6.66,
+    "nano_aiu": 116842420000.0
+  },
+  "total_tokens_all_runs": {
+    "input": 1908725,
+    "output": 24994,
+    "cache_read": 1648475,
+    "cache_write": 88276,
+    "reasoning": 11946
+  },
+  "phase_token_log": [
+    {
+      "phase": "context",
+      "run_id": "37434287638",
+      "model": "gpt-5.4",
+      "phase_tokens": 305287,
+      "cumulative_tokens": 305287,
+      "input_tokens": 300551,
+      "output_tokens": 4736,
+      "cached_tokens": 246272,
+      "cache_write_tokens": 0,
+      "est_credits": 26.830549999999995,
+      "est_usd": 0.2683055,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "skill",
+        "view",
+        "apply_patch"
+      ],
+      "premium_cost": 1.0,
+      "nano_aiu": 26830550000.0,
+      "cost_source": "session_metrics",
+      "models_used": [
+        "gpt-5.4"
+      ],
+      "model_breakdown": {
+        "gpt-5.4": {
+          "requests": 5,
+          "premium_cost": 1.0,
+          "nano_aiu": 26830550000.0,
+          "input": 300551,
+          "output": 4736,
+          "cache_read": 246272,
+          "reasoning": 3210
+        }
+      }
+    },
+    {
+      "phase": "prompt_steps",
+      "run_id": "37434287638",
+      "model": "gpt-5.4",
+      "phase_tokens": 372084,
+      "cumulative_tokens": 677371,
+      "input_tokens": 364907,
+      "output_tokens": 7177,
+      "cached_tokens": 321536,
+      "cache_write_tokens": 0,
+      "est_credits": 29.64665,
+      "est_usd": 0.2964665,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "skill",
+        "glob",
+        "view",
+        "apply_patch"
+      ],
+      "premium_cost": 1.0,
+      "nano_aiu": 29646650000.0,
+      "cost_source": "session_metrics",
+      "models_used": [
+        "gpt-5.4"
+      ],
+      "model_breakdown": {
+        "gpt-5.4": {
+          "requests": 8,
+          "premium_cost": 1.0,
+          "nano_aiu": 29646650000.0,
+          "input": 364907,
+          "output": 7177,
+          "cache_read": 321536,
+          "reasoning": 3535
+        }
+      }
+    },
+    {
+      "phase": "coding",
+      "run_id": "37434287638",
+      "model": "gpt-5.4",
+      "phase_tokens": 170973,
+      "cumulative_tokens": 848344,
+      "input_tokens": 169778,
+      "output_tokens": 1195,
+      "cached_tokens": 146944,
+      "cache_write_tokens": 0,
+      "est_credits": 11.1746,
+      "est_usd": 0.111746,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "view",
+        "bash",
+        "apply_patch"
+      ],
+      "premium_cost": 1.0,
+      "nano_aiu": 11174600000.0,
+      "cost_source": "session_metrics",
+      "models_used": [
+        "gpt-5.4"
+      ],
+      "model_breakdown": {
+        "gpt-5.4": {
+          "requests": 5,
+          "premium_cost": 1.0,
+          "nano_aiu": 11174600000.0,
+          "input": 169778,
+          "output": 1195,
+          "cache_read": 146944,
+          "reasoning": 482
+        }
+      }
+    },
+    {
+      "phase": "code_review",
+      "run_id": "37434287638",
+      "model": "claude-haiku-4.5",
+      "phase_tokens": 87050,
+      "cumulative_tokens": 935394,
+      "input_tokens": 85072,
+      "output_tokens": 1978,
+      "cached_tokens": 41646,
+      "cache_write_tokens": 43410,
+      "est_credits": 5.74806,
+      "est_usd": 0.0574806,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "create"
+      ],
+      "premium_cost": 0.33,
+      "nano_aiu": 6833310000.0,
+      "cost_source": "session_metrics",
+      "models_used": [
+        "claude-haiku-4.5"
+      ],
+      "model_breakdown": {
+        "claude-haiku-4.5": {
+          "requests": 2,
+          "premium_cost": 0.33,
+          "nano_aiu": 6833310000.0,
+          "input": 85072,
+          "output": 1978,
+          "cache_read": 41646,
+          "reasoning": 1139
+        }
+      }
+    },
+    {
+      "phase": "unit_testing",
+      "run_id": "37434287638",
+      "model": "gpt-5.4",
+      "phase_tokens": 100030,
+      "cumulative_tokens": 1035424,
+      "input_tokens": 97694,
+      "output_tokens": 2336,
+      "cached_tokens": 78336,
+      "cache_write_tokens": 0,
+      "est_credits": 10.3019,
+      "est_usd": 0.103019,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "apply_patch",
+        "bash"
+      ],
+      "premium_cost": 1.0,
+      "nano_aiu": 10301900000.0,
+      "cost_source": "session_metrics",
+      "models_used": [
+        "gpt-5.4"
+      ],
+      "model_breakdown": {
+        "gpt-5.4": {
+          "requests": 3,
+          "premium_cost": 1.0,
+          "nano_aiu": 10301900000.0,
+          "input": 97694,
+          "output": 2336,
+          "cache_read": 78336,
+          "reasoning": 816
+        }
+      }
+    },
+    {
+      "phase": "validation",
+      "run_id": "37434287638",
+      "model": "claude-haiku-4.5",
+      "phase_tokens": 610113,
+      "cumulative_tokens": 1645537,
+      "input_tokens": 605246,
+      "output_tokens": 4867,
+      "cached_tokens": 560301,
+      "cache_write_tokens": 44866,
+      "est_credits": 12.53101,
+      "est_usd": 0.1253101,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "bash",
+        "view",
+        "glob",
+        "create"
+      ],
+      "premium_cost": 0.33,
+      "nano_aiu": 13652660000.0,
+      "cost_source": "session_metrics",
+      "models_used": [
+        "claude-haiku-4.5"
+      ],
+      "model_breakdown": {
+        "claude-haiku-4.5": {
+          "requests": 13,
+          "premium_cost": 0.33,
+          "nano_aiu": 13652660000.0,
+          "input": 605246,
+          "output": 4867,
+          "cache_read": 560301,
+          "reasoning": 1783
+        }
+      }
+    },
+    {
+      "phase": "documentation",
+      "run_id": "37434287638",
+      "model": "gpt-5.4",
+      "phase_tokens": 107441,
+      "cumulative_tokens": 1752978,
+      "input_tokens": 106319,
+      "output_tokens": 1122,
+      "cached_tokens": 96768,
+      "cache_write_tokens": 0,
+      "est_credits": 6.489949999999999,
+      "est_usd": 0.0648995,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "view",
+        "apply_patch"
+      ],
+      "premium_cost": 1.0,
+      "nano_aiu": 6489950000.0,
+      "cost_source": "session_metrics",
+      "models_used": [
+        "gpt-5.4"
+      ],
+      "model_breakdown": {
+        "gpt-5.4": {
+          "requests": 5,
+          "premium_cost": 1.0,
+          "nano_aiu": 6489950000.0,
+          "input": 106319,
+          "output": 1122,
+          "cache_read": 96768,
+          "reasoning": 291
+        }
+      }
+    },
+    {
+      "phase": "raise_pr",
+      "run_id": "37434287638",
+      "model": "gpt-5.4",
+      "phase_tokens": 180741,
+      "cumulative_tokens": 1933719,
+      "input_tokens": 179158,
+      "output_tokens": 1583,
+      "cached_tokens": 156672,
+      "cache_write_tokens": 0,
+      "est_credits": 11.912799999999999,
+      "est_usd": 0.119128,
+      "included": false,
+      "partial": false,
+      "skills_loaded": [
+        "customize-cloud-agent"
+      ],
+      "tools_invoked": [
+        "rg",
+        "glob",
+        "view",
+        "apply_patch"
+      ],
+      "premium_cost": 1.0,
+      "nano_aiu": 11912800000.0,
+      "cost_source": "session_metrics",
+      "models_used": [
+        "gpt-5.4"
+      ],
+      "model_breakdown": {
+        "gpt-5.4": {
+          "requests": 6,
+          "premium_cost": 1.0,
+          "nano_aiu": 11912800000.0,
+          "input": 179158,
+          "output": 1583,
+          "cache_read": 156672,
+          "reasoning": 690
+        }
+      }
+    }
+  ],
+  "actor": "mgganeshguptha-source",
+  "sdk_usage": {
+    "total_premium_cost": 6.66,
+    "total_nano_aiu": 116842420000.0,
+    "model_usage": {
+      "gpt-5.4": {
+        "requests": 32,
+        "input": 1218407,
+        "output": 18149,
+        "premium_cost": 6.0,
+        "nano_aiu": 96356450000.0
+      },
+      "claude-haiku-4.5": {
+        "requests": 15,
+        "input": 690318,
+        "output": 6845,
+        "premium_cost": 0.66,
+        "nano_aiu": 20485970000.0
+      }
+    },
+    "reported_by": "session_metrics"
+  },
+  "cost_source": {
+    "method": "sdk",
+    "is_estimate": false,
+    "basis": "Copilot SDK session.usage.getMetrics, one session per phase attempt, summed for the run; per-call assistant.usage events as fallback.",
+    "units": "premium-request cost (multipliers applied) and nano-AI units, as reported by the SDK. Not converted to AI credits or dollars: GitHub documents no conversion.",
+    "caveat": "SDK usage APIs are experimental in the pinned SDK version. Reconcile with the organization billing report before quoting a cost."
+  }
+}
