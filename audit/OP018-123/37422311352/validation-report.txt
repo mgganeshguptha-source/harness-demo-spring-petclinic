@@ -1,0 +1,31 @@
+command: mvn -U -T 1C -s $MAVEN_SETTINGS -e test
+exit_code: 0
+summary: BUILD SUCCESS
+coverage: changed-class LINE coverage 100.0% (>= 90.0%)
+
+--- tail ---
+ ==================================================================/_/_/_/
+
+:: Built with Spring Boot :: 4.1.0
+
+
+2026-10-06T06:17:25.508Z  INFO 3432 --- [           main] o.s.s.p.owner.OwnerControllerTests       : Starting OwnerControllerTests using Java 17.0.20.1 with PID 3432 (started by runner in /home/runner/work/harness-demo-spring-petclinic/harness-demo-spring-petclinic/service)
+2026-10-06T06:17:25.509Z  INFO 3432 --- [           main] o.s.s.p.owner.OwnerControllerTests       : No active profile set, falling back to 1 default profile: "default"
+2026-10-06T06:17:25.735Z  INFO 3432 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-06T06:17:25.735Z  INFO 3432 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-06T06:17:25.736Z  INFO 3432 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-10-06T06:17:25.744Z  INFO 3432 --- [           main] o.s.s.p.owner.OwnerControllerTests       : Started OwnerControllerTests in 0.291 seconds (process running for 65.712)
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.868 s -- in org.springframework.samples.petclinic.owner.OwnerControllerTests
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 87, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:40 min (Wall Clock)
+[INFO] Finished at: 2026-10-06T06:17:27Z
+[INFO] ------------------------------------------------------------------------
+
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
