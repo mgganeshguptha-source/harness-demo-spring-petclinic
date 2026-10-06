@@ -67,6 +67,21 @@ public class Vet extends Person {
 		return getSpecialtiesInternal().size();
 	}
 
+	public boolean hasSpecialty(String name) {
+		if (name == null) {
+			return false;
+		}
+
+		String trimmedName = name.trim();
+		if (trimmedName.isEmpty()) {
+			return false;
+		}
+
+		return getSpecialtiesInternal().stream()
+			.anyMatch(specialty -> specialty != null && specialty.getName() != null
+					&& specialty.getName().equalsIgnoreCase(trimmedName));
+	}
+
 	public void addSpecialty(Specialty specialty) {
 		getSpecialtiesInternal().add(specialty);
 	}
