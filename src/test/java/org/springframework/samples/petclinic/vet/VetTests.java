@@ -38,4 +38,86 @@ class VetTests {
 		assertThat(other.getId()).isEqualTo(vet.getId());
 	}
 
+	@Test
+	void hasSpecialtyReturnsTrueForCaseInsensitiveMatch() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty("surgery")).isTrue();
+		assertThat(vet.hasSpecialty("Surgery")).isTrue();
+	}
+
+	@Test
+	void hasSpecialtyReturnsTrueForTrimmedMatch() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty(" surgery ")).isTrue();
+		assertThat(vet.hasSpecialty(" Surgery")).isTrue();
+	}
+
+	@Test
+	void hasSpecialtyReturnsFalseWhenNoSpecialtyMatches() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty("dentistry")).isFalse();
+		assertThat(vet.hasSpecialty("sur gery")).isFalse();
+	}
+
+	@Test
+	void hasSpecialtyReturnsFalseWhenVetHasNoSpecialties() {
+		Vet vet = new Vet();
+
+		assertThat(vet.hasSpecialty("surgery")).isFalse();
+	}
+
+	@Test
+	void hasSpecialtyReturnsFalseForNullOrBlankInput() {
+		Vet vet = new Vet();
+		vet.addSpecialty(specialty("surgery"));
+
+		assertThat(vet.hasSpecialty(null)).isFalse();
+		assertThat(vet.hasSpecialty(" ")).isFalse();
+		assertThat(vet.hasSpecialty("\t")).isFalse();
+	}
+
+	@Test
+	void hasSpecialtyDoesNotModifySpecialties() {
+		Vet vet = new Vet();
+		Specialty surgery = specialty("surgery");
+		Specialty radiology = specialty("radiology");
+		vet.addSpecialty(surgery);
+		vet.addSpecialty(radiology);
+
+		assertThat(vet.getNrOfSpecialties()).isEqualTo(2);
+		assertThat(vet.getSpecialties()).extracting(Specialty::getName).containsExactly("radiology", "surgery");
+
+		assertThat(vet.hasSpecialty("surgery")).isTrue();
+		assertThat(vet.hasSpecialty("dentistry")).isFalse();
+		assertThat(vet.hasSpecialty(" ")).isFalse();
+
+		assertThat(vet.getNrOfSpecialties()).isEqualTo(2);
+		assertThat(vet.getSpecialties()).containsExactly(radiology, surgery);
+	}
+
+	@Test
+	void specialtyHelpersRemainUnchanged() {
+		Vet vet = new Vet();
+		Specialty surgery = specialty("surgery");
+		Specialty radiology = specialty("radiology");
+
+		vet.addSpecialty(surgery);
+		vet.addSpecialty(radiology);
+
+		assertThat(vet.getNrOfSpecialties()).isEqualTo(2);
+		assertThat(vet.getSpecialties()).containsExactly(radiology, surgery);
+	}
+
+	private Specialty specialty(String name) {
+		Specialty specialty = new Specialty();
+		specialty.setName(name);
+		return specialty;
+	}
+
 }
