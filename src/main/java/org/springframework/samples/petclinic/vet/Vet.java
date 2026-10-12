@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic.vet;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -67,19 +68,23 @@ public class Vet extends Person {
 		return getSpecialtiesInternal().size();
 	}
 
-	public boolean hasSpecialty(String name) {
+	public Optional<Specialty> findSpecialty(String name) {
 		if (name == null) {
-			return false;
+			return Optional.empty();
 		}
 
 		String trimmedName = name.trim();
 		if (trimmedName.isEmpty()) {
-			return false;
+			return Optional.empty();
 		}
 
 		return getSpecialtiesInternal().stream()
-			.map(Specialty::getName)
-			.anyMatch(specialtyName -> specialtyName != null && specialtyName.equalsIgnoreCase(trimmedName));
+			.filter(specialty -> specialty.getName() != null && specialty.getName().equalsIgnoreCase(trimmedName))
+			.findFirst();
+	}
+
+	public boolean hasSpecialty(String name) {
+		return findSpecialty(name).isPresent();
 	}
 
 	public void addSpecialty(Specialty specialty) {
